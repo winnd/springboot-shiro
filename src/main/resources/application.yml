@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+#debug: true
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bishe_be?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+
+mybatis:
+  mapper-locations: classpath*:com/bishe/demo/dao/mapper/*.xml
+  type-aliases-package: com.bishe.demo.model
+#  config-location: classpath:mybatis-config.xml
+
+
+logging:
+  level: 
+    com:
+      bishe:
+        demo:
+          dao: debug

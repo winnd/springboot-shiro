@@ -1,0 +1,32 @@
+路由
+
+/relic
+    
+    select/all
+    select/relicType/{relicType}
+    select/{id}
+    insert
+    updateById
+    delete
+    
+
+/login
+
+/friendShipLink
+    /select/{id}
+    /select/all
+    /insert
+    /updateById
+    /delete/{id}
+    
+    
+swagger 地址
+http://localhost:8082/swagger-ui.html#/
+    
+
+
+后台一直显示没有权限 
+-- 因为前段跨域, 每次请求有两个请求, 前面一个是option预检,没有cookie
+-- 解决1 前台配置proxytable, 代理到本地         在    ① 前端 config/index 中写 '/api'代理, ②  dev.env.js中写"''/api"
+-- 解决2 后台shiro配置处理options的方法         增加  ① OptionsFilter.java  ② CORSConfig.java ③ 前端 dev.env.js中写 "http://localhost:8082"
+

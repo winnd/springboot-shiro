@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bishe.demo.dao.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.bishe.demo.model.Permission">
+    <constructor>
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="res_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="res_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="permission" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_id, res_name, res_type, permission, url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectPermissionsByUser" resultType="com.bishe.demo.model.Permission" parameterType="com.bishe.demo.model.User">
+    select
+      P.id, P.parent_id, P.res_name, P.res_type, P.permission, P.url
+    from sys_permission P
+    left join sys_role_permission RP on RP.permission_id = P.id
+    left join user_role UR on UR.role_id = RP.role_id
+    left join user U on UR.user_id = U.id
+    where U.account = #{account,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bishe.demo.model.Permission">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_permission (parent_id, res_name, res_type,
+    permission, url)
+    values (#{parentId,jdbcType=INTEGER}, #{resName,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR},
+    #{permission,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bishe.demo.model.Permission">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="resName != null">
+        res_name,
+      </if>
+      <if test="resType != null">
+        res_type,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="resName != null">
+        #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        #{resType,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bishe.demo.model.Permission">
+    update sys_permission
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="resName != null">
+        res_name = #{resName,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        res_type = #{resType,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bishe.demo.model.Permission">
+    update sys_permission
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      res_name = #{resName,jdbcType=VARCHAR},
+      res_type = #{resType,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
