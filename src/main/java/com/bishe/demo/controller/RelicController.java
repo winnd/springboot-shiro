@@ -6,9 +6,8 @@ import com.bishe.demo.service.IRelicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.websocket.server.PathParam;
-import java.util.HashMap;
 
 @Controller
 @ResponseBody
@@ -17,48 +16,36 @@ public class RelicController {
 
     @Autowired IRelicService iRelicService;
 
-
-    @RequestMapping(value = "select/all", method = RequestMethod.GET)
+    @GetMapping(value = "select/allRelic")
     public ResponseServer selectAll() {
         return iRelicService.selectAllRelic();
     }
 
-    @RequestMapping(value = "select/relicType/{relicType}", method = RequestMethod.GET)
-    public ResponseServer selectByRelicType(@PathVariable Integer relicType) {
+    @GetMapping(value = "select/relicType")
+    public ResponseServer selectByRelicType(@RequestParam("relicType") Integer relicType) {
         return iRelicService.selectByRelicType(relicType);
     }
 
-    @RequestMapping(value = "/select/{id}", method = RequestMethod.GET)
-    public ResponseServer selectByPrimaryKey(@PathVariable Integer id) {
+    @GetMapping(value = "/select")
+    public ResponseServer selectByPrimaryKey(@RequestParam Integer id) {
         return iRelicService.selectByPrimaryKey(id);
     }
 
 
-//    @RequestMapping(value = "/resources", method = RequestMethod.GET)
-//    public ResponseServer<Relic> getResource(
-//            @RequestParam(value = "relicId", required = false) Integer relicId, // postman里传参数
-//            @RequestBody(value = "name", required = false) String name
-//            @RequestBody User user    // json 对象
-//    ) {
-//        Object aa = new HashMap<>();
-//        return ResponseServer.createBySuccessMsg("测试成功");
-//    }
-
-
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ResponseServer insertRelic(Relic relic) {
-        return iRelicService.insert(relic);
+    @PostMapping(value = "/addNew")
+    public ResponseServer insertRelic2(
+            @RequestPart(name = "formData") Relic relic, 
+            @RequestParam(name = "coverImg", required = false) MultipartFile coverImg,
+            @RequestParam(name = "imgList", required = false) MultipartFile[] imgList) {
+        return iRelicService.insert(relic, coverImg, imgList);
     }
 
-
-
-    @RequestMapping(value = "/updateById", method = RequestMethod.POST)
+    @PostMapping(value = "/updateById")
     public ResponseServer updateByPrimaryKey(Relic relic) {
-        System.out.println(relic.getId());
         return iRelicService.updateByPrimaryKey(relic);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @DeleteMapping(value = "/delete")
     public ResponseServer deleteRelic(Integer id) {
         return iRelicService.delectRelicById(id);
     }

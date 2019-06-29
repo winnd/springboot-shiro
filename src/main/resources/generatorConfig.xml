@@ -51,7 +51,7 @@
     </javaClientGenerator>
     
     <!--domainObjectName是实体类名-->
-    <table tableName="sys_permission" domainObjectName="Permission"
+    <table tableName="relic_images" domainObjectName="RelicImage"
            enableCountByExample="false"
            enableDeleteByExample="false"
            enableUpdateByExample="false"
@@ -64,7 +64,7 @@
       -->
       <!--<property name="constructorBased" value="false"/>-->
       <!--<property name="selectAllOrderByClause" value="id"/>-->
-      <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+      <generatedKey column="image_id" sqlStatement="Mysql" identity="true" />
     </table>
     <!--selectByExampleQueryId="false"-->
   </context>

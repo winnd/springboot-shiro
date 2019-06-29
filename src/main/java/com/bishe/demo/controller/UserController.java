@@ -37,7 +37,6 @@ public class UserController {
 
     @RequestMapping(value = "/updateById", method = RequestMethod.POST)
     public ResponseServer updateByPrimaryKey(User user) {
-        System.out.println(user.getId());
         return iUserService.updateByPrimaryKey(user);
     }
 

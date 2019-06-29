@@ -14,26 +14,17 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service("iLoginService")
 public class LoginServiceImpl implements ILoginService {
 
-
     @Autowired UserMapper userDao;
-
     @Autowired PermissionMapper permissionDao;
 
     @Override
     public ResponseServer checkUser(User user) {
-//        int hasUser = userDao.checkAccount(user.getAccount());
-//
-//        if (hasUser > 0) {
-//            return ResponseServer.createByErrorMsg("该用户名已被使用");
-//        } else {
-//            return ResponseServer.createBySuccessMsg("注册成功");
-//        }
-
         return null;
     }
 
@@ -82,12 +73,27 @@ public class LoginServiceImpl implements ILoginService {
     public ResponseServer getInfo() {
         Session session = SecurityUtils.getSubject().getSession();
         User currentUser = (User) session.getAttribute("userInfo");
+
         String accountName = currentUser.getName();
 
-        List<Permission> permissions = permissionDao.selectPermissionsByUser(new User(accountName));
-        session.setAttribute("userPermission", permissions);
+        List<Permission> allPermissions = permissionDao.selectPermissionsByUser(new User(accountName));
+//        List<Permission> btnPermissions = allPermissions.stream()               // 查找所有按钮的权限
+//                .filter(x -> "button".equals(x.getResType()))
+//                .collect(Collectors.toList());
+//
+        Set<Permission> menuPermissions = allPermissions.stream()               // 查找所有菜单的权限
+                .filter(x -> "menu".equals(x.getResType()))
+                .collect(Collectors.toSet());
 
-        return ResponseServer.createBySuccess("用户权限列表", permissions);
+        session.setAttribute("currentUserAllPermissions", allPermissions);
+
+
+//        currentUser.setMenuPermissionList(menuPermissions);
+//        currentUser.setBtnPermissionList(btnPermissions);
+
+        currentUser.setAllPermissionList(allPermissions);
+        
+        return ResponseServer.createBySuccess("当前用户信息", currentUser);
     }
 
     @Override

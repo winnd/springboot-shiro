@@ -2,6 +2,7 @@ package com.bishe.demo.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class User {
     private Integer id;
@@ -24,7 +25,11 @@ public class User {
 
     private Date lastLoginTime;
 
-    private List<Permission> permissionList;
+    private Set<Permission> menuPermissionList;
+    
+    private List<Permission> btnPermissionList;
+
+    private List<Permission> allPermissionList;
     
     private int role;
 
@@ -143,11 +148,27 @@ public class User {
         this.role = role;
     }
 
-    public List<Permission> getPermissionList() {
-        return permissionList;
+    public List<Permission> getBtnPermissionList() {
+        return btnPermissionList;
     }
 
-    public void setPermissionList(List<Permission> permissionList) {
-        this.permissionList = permissionList;
+    public void setBtnPermissionList(List<Permission> btnPermissionList) {
+        this.btnPermissionList = btnPermissionList;
+    }
+
+    public Set<Permission> getMenuPermissionList() {
+        return menuPermissionList;
+    }
+
+    public void setMenuPermissionList(Set<Permission> menuPermissionList) {
+        this.menuPermissionList = menuPermissionList;
+    }
+
+    public List<Permission> getAllPermissionList() {
+        return allPermissionList;
+    }
+
+    public void setAllPermissionList(List<Permission> allPermissionList) {
+        this.allPermissionList = allPermissionList;
     }
 }

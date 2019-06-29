@@ -2,19 +2,20 @@ package com.bishe.demo.service;
 
 import com.bishe.demo.common.util.Response.ResponseServer;
 import com.bishe.demo.model.Relic;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface IRelicService {
     
-    public ResponseServer selectAllRelic();
+    ResponseServer selectAllRelic();
     
-    public ResponseServer selectByRelicType(Integer i);
+    ResponseServer selectByRelicType(Integer i);
     
-    public ResponseServer selectByPrimaryKey(Integer id);
+    ResponseServer selectByPrimaryKey(Integer id);
 
-    public ResponseServer insert(Relic relic);
+    ResponseServer insert(Relic relic, MultipartFile coverImg,MultipartFile[] imgList);
     
-    public ResponseServer updateByPrimaryKey(Relic relic);
+    ResponseServer updateByPrimaryKey(Relic relic);
 
-    public ResponseServer delectRelicById(Integer id);
+    ResponseServer delectRelicById(Integer id);
 
 }

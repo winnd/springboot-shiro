@@ -22,7 +22,7 @@
   </select>
   <select id="selectPermissionsByUser" resultType="com.bishe.demo.model.Permission" parameterType="com.bishe.demo.model.User">
     select
-      P.id, P.parent_id, P.res_name, P.res_type, P.permission, P.url
+      P.id, P.parent_id, P.res_name, P.res_type, P.permission, P.url,UR.role_id as role
     from sys_permission P
     left join sys_role_permission RP on RP.permission_id = P.id
     left join user_role UR on UR.role_id = RP.role_id
@@ -45,7 +45,7 @@
   <insert id="insertSelective" parameterType="com.bishe.demo.model.Permission">
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT LAST_INSERT_ID()
-    </selectKey>
+    </selectKey>32
     insert into sys_permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="parentId != null">

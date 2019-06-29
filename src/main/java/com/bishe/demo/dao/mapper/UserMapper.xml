@@ -32,8 +32,9 @@
   </select>
   <select id="checkLogin" resultType="com.bishe.demo.model.User" parameterType="com.bishe.demo.model.User">
     select
-    <include refid="Base_Column_List" />
-    from user
+    <include refid="Base_Column_List" />,UR.role_id as role
+    from user U
+    left join user_role UR on U.id = UR.user_id
     where account = #{account,jdbcType=VARCHAR}
     and password = #{password,jdbcType=VARCHAR}
   </select>

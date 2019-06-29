@@ -5,6 +5,7 @@ public enum  ResponseCode {
     SUCCESS(0, "成功"),
     ERROR(1, "错误"),
     NEED_LOGIN(10, "未登陆,请登陆后再操作"),
+    UPLOAD_FAIL(9, "上传失败"),
     NO_PERMISSION(11,"当前用户没有该操作权限"),
     ILLEGAL_ARGUMENT(2, "参数错误");
 

@@ -1,6 +1,7 @@
 package com.bishe.demo.dao;
 
 import com.bishe.demo.model.Relic;
+import com.bishe.demo.model.RelicImage;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public interface RelicMapper {
 
     int insertSelective(Relic record);
 
+    List<RelicImage> selectRelicImage(Integer id);
+    
     Relic selectByPrimaryKey(Integer id);
 
     List<Relic> selectByRelicType(Integer relicType);

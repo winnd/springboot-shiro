@@ -16,5 +16,5 @@ public class PermissionServiceImpl implements IPermissionService {
     public List<Permission> selectPermissionByUserName(User user) {
         return permissionDao.selectPermissionsByUser(user);
     }
-
+    
 }

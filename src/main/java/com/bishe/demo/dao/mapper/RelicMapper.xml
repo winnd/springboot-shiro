@@ -1,382 +1,392 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bishe.demo.dao.RelicMapper" >
-  <resultMap id="BaseResultMap" type="com.bishe.demo.model.Relic" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="code" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="relic_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="amount" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="level" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="size" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="weight" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="attrition_rate" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="application" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="craft" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="material" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="shape" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="feature" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="cultural_connotation" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="required_tech" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="area" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="age" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="create_by" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_by" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="protect_value" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="culture_value" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="dynasty" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="transformed_urn" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="bucket_key" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="model_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="urn" jdbcType="VARCHAR" javaType="java.lang.String" />
+<mapper namespace="com.bishe.demo.dao.RelicMapper">
+  <resultMap id="BaseResultMap" type="com.bishe.demo.model.Relic">
+    <constructor>
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="pic_url" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="code" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="relic_type" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="amount" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="level" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="size" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="weight" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+      <arg column="attrition_rate" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="application" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="craft" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="material" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="shape" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="feature" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="cultural_connotation" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="required_tech" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="area" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="age" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="create_by" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+      <arg column="update_by" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+      <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="protect_value" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="culture_value" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="dynasty" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="transformed_urn" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="bucket_key" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="model_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="urn" jdbcType="VARCHAR" javaType="java.lang.String"/>
     </constructor>
+    <!-- column=id 为传参 -->
+    <collection property="relicImages" column="id" ofType="com.bishe.demo.model.RelicImage" select="selectRelicImage"/>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, name, pic_url, code, relic_type, amount, level, size, weight, attrition_rate, 
     application, craft, material, shape, feature, cultural_connotation, required_tech, 
     area, age, create_by, create_time, update_by, update_time, introduction, protect_value, 
     culture_value, dynasty, transformed_urn, bucket_key, model_name, urn
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from relic
+  <!--查找 relicImage 以返回 List<RelicImage> -->
+  <select id="selectRelicImage" resultType="com.bishe.demo.model.RelicImage">
+    SELECT RI.image_id,RI.relic_id,RI.url,RI.create_time,RI.create_by,RI.update_time,RI.update_by
+      from relic_images RI
+    where RI.relic_id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from relic R
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
   <select id="selectAll" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from relic
   </select>
   <select id="selectByRelicType" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from relic
     where relic_type = #{relicType,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from relic
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bishe.demo.model.Relic" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  <insert id="insert" parameterType="com.bishe.demo.model.Relic">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into relic (name, pic_url, code, 
-      relic_type, amount, level, 
-      size, weight, attrition_rate, 
-      application, craft, material, 
-      shape, feature, cultural_connotation, 
-      required_tech, area, age, 
-      create_by, create_time, update_by, 
-      update_time, introduction, protect_value, 
-      culture_value, dynasty, transformed_urn, 
-      bucket_key, model_name, urn
-      )
-    values (#{name,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{relicType,jdbcType=INTEGER}, #{amount,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
-      #{size,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, #{attritionRate,jdbcType=VARCHAR}, 
-      #{application,jdbcType=VARCHAR}, #{craft,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR}, 
-      #{shape,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, #{culturalConnotation,jdbcType=VARCHAR}, 
-      #{requiredTech,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
-      #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{introduction,jdbcType=VARCHAR}, #{protectValue,jdbcType=VARCHAR}, 
-      #{cultureValue,jdbcType=VARCHAR}, #{dynasty,jdbcType=VARCHAR}, #{transformedUrn,jdbcType=VARCHAR}, 
-      #{bucketKey,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{urn,jdbcType=VARCHAR}
-      )
+    insert into relic (name, pic_url, code,
+    relic_type, amount, level,
+    size, weight, attrition_rate,
+    application, craft, material,
+    shape, feature, cultural_connotation,
+    required_tech, area, age,
+    create_by, create_time, update_by,
+    update_time, introduction, protect_value,
+    culture_value, dynasty, transformed_urn,
+    bucket_key, model_name, urn
+    )
+    values (#{name,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+    #{relicType,jdbcType=INTEGER}, #{amount,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR},
+    #{size,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, #{attritionRate,jdbcType=VARCHAR},
+    #{application,jdbcType=VARCHAR}, #{craft,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR},
+    #{shape,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, #{culturalConnotation,jdbcType=VARCHAR},
+    #{requiredTech,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR},
+    #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER},
+    #{updateTime,jdbcType=TIMESTAMP}, #{introduction,jdbcType=VARCHAR}, #{protectValue,jdbcType=VARCHAR},
+    #{cultureValue,jdbcType=VARCHAR}, #{dynasty,jdbcType=VARCHAR}, #{transformedUrn,jdbcType=VARCHAR},
+    #{bucketKey,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, #{urn,jdbcType=VARCHAR}
+    )
   </insert>
-  <insert id="insertSelective" parameterType="com.bishe.demo.model.Relic" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  <insert id="insertSelective" parameterType="com.bishe.demo.model.Relic">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into relic
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
         name,
       </if>
-      <if test="picUrl != null" >
+      <if test="picUrl != null">
         pic_url,
       </if>
-      <if test="code != null" >
+      <if test="code != null">
         code,
       </if>
-      <if test="relicType != null" >
+      <if test="relicType != null">
         relic_type,
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount,
       </if>
-      <if test="level != null" >
+      <if test="level != null">
         level,
       </if>
-      <if test="size != null" >
+      <if test="size != null">
         size,
       </if>
-      <if test="weight != null" >
+      <if test="weight != null">
         weight,
       </if>
-      <if test="attritionRate != null" >
+      <if test="attritionRate != null">
         attrition_rate,
       </if>
-      <if test="application != null" >
+      <if test="application != null">
         application,
       </if>
-      <if test="craft != null" >
+      <if test="craft != null">
         craft,
       </if>
-      <if test="material != null" >
+      <if test="material != null">
         material,
       </if>
-      <if test="shape != null" >
+      <if test="shape != null">
         shape,
       </if>
-      <if test="feature != null" >
+      <if test="feature != null">
         feature,
       </if>
-      <if test="culturalConnotation != null" >
+      <if test="culturalConnotation != null">
         cultural_connotation,
       </if>
-      <if test="requiredTech != null" >
+      <if test="requiredTech != null">
         required_tech,
       </if>
-      <if test="area != null" >
+      <if test="area != null">
         area,
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         age,
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         create_by,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         update_by,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
-      <if test="introduction != null" >
+      <if test="introduction != null">
         introduction,
       </if>
-      <if test="protectValue != null" >
+      <if test="protectValue != null">
         protect_value,
       </if>
-      <if test="cultureValue != null" >
+      <if test="cultureValue != null">
         culture_value,
       </if>
-      <if test="dynasty != null" >
+      <if test="dynasty != null">
         dynasty,
       </if>
-      <if test="transformedUrn != null" >
+      <if test="transformedUrn != null">
         transformed_urn,
       </if>
-      <if test="bucketKey != null" >
+      <if test="bucketKey != null">
         bucket_key,
       </if>
-      <if test="modelName != null" >
+      <if test="modelName != null">
         model_name,
       </if>
-      <if test="urn != null" >
+      <if test="urn != null">
         urn,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="picUrl != null" >
+      <if test="picUrl != null">
         #{picUrl,jdbcType=VARCHAR},
       </if>
-      <if test="code != null" >
+      <if test="code != null">
         #{code,jdbcType=VARCHAR},
       </if>
-      <if test="relicType != null" >
+      <if test="relicType != null">
         #{relicType,jdbcType=INTEGER},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         #{amount,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
+      <if test="level != null">
         #{level,jdbcType=VARCHAR},
       </if>
-      <if test="size != null" >
+      <if test="size != null">
         #{size,jdbcType=VARCHAR},
       </if>
-      <if test="weight != null" >
+      <if test="weight != null">
         #{weight,jdbcType=DOUBLE},
       </if>
-      <if test="attritionRate != null" >
+      <if test="attritionRate != null">
         #{attritionRate,jdbcType=VARCHAR},
       </if>
-      <if test="application != null" >
+      <if test="application != null">
         #{application,jdbcType=VARCHAR},
       </if>
-      <if test="craft != null" >
+      <if test="craft != null">
         #{craft,jdbcType=VARCHAR},
       </if>
-      <if test="material != null" >
+      <if test="material != null">
         #{material,jdbcType=VARCHAR},
       </if>
-      <if test="shape != null" >
+      <if test="shape != null">
         #{shape,jdbcType=VARCHAR},
       </if>
-      <if test="feature != null" >
+      <if test="feature != null">
         #{feature,jdbcType=VARCHAR},
       </if>
-      <if test="culturalConnotation != null" >
+      <if test="culturalConnotation != null">
         #{culturalConnotation,jdbcType=VARCHAR},
       </if>
-      <if test="requiredTech != null" >
+      <if test="requiredTech != null">
         #{requiredTech,jdbcType=VARCHAR},
       </if>
-      <if test="area != null" >
+      <if test="area != null">
         #{area,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         #{age,jdbcType=VARCHAR},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         #{createBy,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         #{updateBy,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="introduction != null" >
+      <if test="introduction != null">
         #{introduction,jdbcType=VARCHAR},
       </if>
-      <if test="protectValue != null" >
+      <if test="protectValue != null">
         #{protectValue,jdbcType=VARCHAR},
       </if>
-      <if test="cultureValue != null" >
+      <if test="cultureValue != null">
         #{cultureValue,jdbcType=VARCHAR},
       </if>
-      <if test="dynasty != null" >
+      <if test="dynasty != null">
         #{dynasty,jdbcType=VARCHAR},
       </if>
-      <if test="transformedUrn != null" >
+      <if test="transformedUrn != null">
         #{transformedUrn,jdbcType=VARCHAR},
       </if>
-      <if test="bucketKey != null" >
+      <if test="bucketKey != null">
         #{bucketKey,jdbcType=VARCHAR},
       </if>
-      <if test="modelName != null" >
+      <if test="modelName != null">
         #{modelName,jdbcType=VARCHAR},
       </if>
-      <if test="urn != null" >
+      <if test="urn != null">
         #{urn,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bishe.demo.model.Relic" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.bishe.demo.model.Relic">
     update relic
-    <set >
-      <if test="name != null" >
+    <set>
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="picUrl != null" >
+      <if test="picUrl != null">
         pic_url = #{picUrl,jdbcType=VARCHAR},
       </if>
-      <if test="code != null" >
+      <if test="code != null">
         code = #{code,jdbcType=VARCHAR},
       </if>
-      <if test="relicType != null" >
+      <if test="relicType != null">
         relic_type = #{relicType,jdbcType=INTEGER},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount = #{amount,jdbcType=VARCHAR},
       </if>
-      <if test="level != null" >
+      <if test="level != null">
         level = #{level,jdbcType=VARCHAR},
       </if>
-      <if test="size != null" >
+      <if test="size != null">
         size = #{size,jdbcType=VARCHAR},
       </if>
-      <if test="weight != null" >
+      <if test="weight != null">
         weight = #{weight,jdbcType=DOUBLE},
       </if>
-      <if test="attritionRate != null" >
+      <if test="attritionRate != null">
         attrition_rate = #{attritionRate,jdbcType=VARCHAR},
       </if>
-      <if test="application != null" >
+      <if test="application != null">
         application = #{application,jdbcType=VARCHAR},
       </if>
-      <if test="craft != null" >
+      <if test="craft != null">
         craft = #{craft,jdbcType=VARCHAR},
       </if>
-      <if test="material != null" >
+      <if test="material != null">
         material = #{material,jdbcType=VARCHAR},
       </if>
-      <if test="shape != null" >
+      <if test="shape != null">
         shape = #{shape,jdbcType=VARCHAR},
       </if>
-      <if test="feature != null" >
+      <if test="feature != null">
         feature = #{feature,jdbcType=VARCHAR},
       </if>
-      <if test="culturalConnotation != null" >
+      <if test="culturalConnotation != null">
         cultural_connotation = #{culturalConnotation,jdbcType=VARCHAR},
       </if>
-      <if test="requiredTech != null" >
+      <if test="requiredTech != null">
         required_tech = #{requiredTech,jdbcType=VARCHAR},
       </if>
-      <if test="area != null" >
+      <if test="area != null">
         area = #{area,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         age = #{age,jdbcType=VARCHAR},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         create_by = #{createBy,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         update_by = #{updateBy,jdbcType=INTEGER},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="introduction != null" >
+      <if test="introduction != null">
         introduction = #{introduction,jdbcType=VARCHAR},
       </if>
-      <if test="protectValue != null" >
-        protect_value = #{protectValue,jdbcType=VARCHAR},
+      <if test="protectValue != null">
+        protect_value = #{protectValue,jdbcType=INTEGER},
       </if>
-      <if test="cultureValue != null" >
-        culture_value = #{cultureValue,jdbcType=VARCHAR},
+      <if test="cultureValue != null">
+        culture_value = #{cultureValue,jdbcType=INTEGER},
       </if>
-      <if test="dynasty != null" >
+      <if test="dynasty != null">
         dynasty = #{dynasty,jdbcType=VARCHAR},
       </if>
-      <if test="transformedUrn != null" >
+      <if test="transformedUrn != null">
         transformed_urn = #{transformedUrn,jdbcType=VARCHAR},
       </if>
-      <if test="bucketKey != null" >
+      <if test="bucketKey != null">
         bucket_key = #{bucketKey,jdbcType=VARCHAR},
       </if>
-      <if test="modelName != null" >
+      <if test="modelName != null">
         model_name = #{modelName,jdbcType=VARCHAR},
       </if>
-      <if test="urn != null" >
+      <if test="urn != null">
         urn = #{urn,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bishe.demo.model.Relic" >
+  <update id="updateByPrimaryKey" parameterType="com.bishe.demo.model.Relic">
     update relic
     set name = #{name,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
@@ -401,8 +411,8 @@
       update_by = #{updateBy,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       introduction = #{introduction,jdbcType=VARCHAR},
-      protect_value = #{protectValue,jdbcType=VARCHAR},
-      culture_value = #{cultureValue,jdbcType=VARCHAR},
+      protect_value = #{protectValue,jdbcType=INTEGER},
+      culture_value = #{cultureValue,jdbcType=INTEGER},
       dynasty = #{dynasty,jdbcType=VARCHAR},
       transformed_urn = #{transformedUrn,jdbcType=VARCHAR},
       bucket_key = #{bucketKey,jdbcType=VARCHAR},

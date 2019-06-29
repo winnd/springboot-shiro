@@ -16,7 +16,7 @@ public class RelicTypeController {
 
     @Autowired IRelicTypeService iRelicTypeService;
 
-    @RequestMapping(value = "select/all", method = RequestMethod.GET)
+    @RequestMapping(value = "select/allRelicType", method = RequestMethod.GET)
     public ResponseServer selectAll() {
         return iRelicTypeService.selectAll();
     }

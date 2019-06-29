@@ -26,6 +26,10 @@ public class Permission {
         super();
     }
 
+    public Permission(String resType) {
+        this.resType = resType;
+    }
+
     public Integer getId() {
         return id;
     }

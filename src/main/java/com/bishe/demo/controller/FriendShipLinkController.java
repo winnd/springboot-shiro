@@ -37,7 +37,6 @@ public class FriendShipLinkController {
 
     @RequestMapping(value = "/updateById", method = RequestMethod.POST)
     public ResponseServer updateByPrimaryKey(FriendShipLink friendShipLink) {
-        System.out.println(friendShipLink.getId());
         return iFriendShipLinkService.updateByPrimaryKey(friendShipLink);
     }
 

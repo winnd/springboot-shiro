@@ -1,6 +1,8 @@
 package com.bishe.demo.model;
 
+import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 public class Relic {
     private Integer id;
@@ -51,9 +53,9 @@ public class Relic {
 
     private String introduction;
 
-    private String protectValue;
+    private Integer protectValue;
 
-    private String cultureValue;
+    private Integer cultureValue;
 
     private String dynasty;
 
@@ -65,7 +67,13 @@ public class Relic {
 
     private String urn;
 
-    public Relic(Integer id, String name, String picUrl, String code, Integer relicType, String amount, String level, String size, Double weight, String attritionRate, String application, String craft, String material, String shape, String feature, String culturalConnotation, String requiredTech, String area, String age, Integer createBy, Date createTime, Integer updateBy, Date updateTime, String introduction, String protectValue, String cultureValue, String dynasty, String transformedUrn, String bucketKey, String modelName, String urn) {
+    private List<RelicImage> relicImages;
+
+    private File coverImg;                          // 上传用, 封面
+
+    private File imgList;                           // 上传用, 其他图片
+
+    public Relic(Integer id, String name, String picUrl, String code, Integer relicType, String amount, String level, String size, Double weight, String attritionRate, String application, String craft, String material, String shape, String feature, String culturalConnotation, String requiredTech, String area, String age, Integer createBy, Date createTime, Integer updateBy, Date updateTime, String introduction, Integer protectValue, Integer cultureValue, String dynasty, String transformedUrn, String bucketKey, String modelName, String urn) {
         this.id = id;
         this.name = name;
         this.picUrl = picUrl;
@@ -295,20 +303,20 @@ public class Relic {
         this.introduction = introduction == null ? null : introduction.trim();
     }
 
-    public String getProtectValue() {
+    public Integer getProtectValue() {
         return protectValue;
     }
 
-    public void setProtectValue(String protectValue) {
-        this.protectValue = protectValue == null ? null : protectValue.trim();
+    public void setProtectValue(Integer protectValue) {
+        this.protectValue = protectValue;
     }
 
-    public String getCultureValue() {
+    public Integer getCultureValue() {
         return cultureValue;
     }
 
-    public void setCultureValue(String cultureValue) {
-        this.cultureValue = cultureValue == null ? null : cultureValue.trim();
+    public void setCultureValue(Integer cultureValue) {
+        this.cultureValue = cultureValue;
     }
 
     public String getDynasty() {
@@ -349,5 +357,29 @@ public class Relic {
 
     public void setUrn(String urn) {
         this.urn = urn == null ? null : urn.trim();
+    }
+
+    public List<RelicImage> getRelicImages() {
+        return relicImages;
+    }
+
+    public void setRelicImages(List<RelicImage> relicImages) {
+        this.relicImages = relicImages;
+    }
+
+    public File getCoverImg() {
+        return coverImg;
+    }
+
+    public void setCoverImg(File coverImg) {
+        this.coverImg = coverImg;
+    }
+
+    public File getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(File imgList) {
+        this.imgList = imgList;
     }
 }

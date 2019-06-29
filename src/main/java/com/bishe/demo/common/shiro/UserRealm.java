@@ -34,7 +34,7 @@ public class UserRealm extends AuthorizingRealm {
         try {
             Session session = SecurityUtils.getSubject().getSession();
             
-            HashMap permissionMap = (HashMap) session.getAttribute("userPermission");
+            HashMap permissionMap = (HashMap) session.getAttribute("currentUserAllPermissions");
 
             ObjectMapper objectMapper = new ObjectMapper();
             String permissionStr = objectMapper.writeValueAsString(permissionMap);

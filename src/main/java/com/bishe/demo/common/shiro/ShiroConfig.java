@@ -1,9 +1,8 @@
 package com.bishe.demo.common.shiro;
 
 
-import com.bishe.demo.common.shiro.AjaxPermissionAuthorizationFilter;
-import com.bishe.demo.common.shiro.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -11,7 +10,6 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;
@@ -26,8 +24,8 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(getSecurityManager);
         Map<String, Filter> filterMap = new LinkedHashMap<>();
-        filterMap.put("authc", new AjaxPermissionAuthorizationFilter());
-        filterMap.put("custom", new OptionsFilter());
+        filterMap.put("authc", new AjaxPermissionsAuthorizationFilter());            // 登录弹出
+//        filterMap.put("custom", new OptionsFilter());                               // 
         shiroFilterFactoryBean.setFilters(filterMap);
 
         /*定义shiro过滤链  Map结构
@@ -37,28 +35,41 @@ public class ShiroConfig {
          */
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-//        filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+//        filterChainDefinitionMap.put("/getPermission", "anon");
+        
+        // 静态资源
+        filterChainDefinitionMap.put("/image/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/staic/**", "anon");
+        
+        // swagger
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
         filterChainDefinitionMap.put("/v2/api-docs", "anon");
         filterChainDefinitionMap.put("/webjars/springfox-swagger-ui/**", "anon");
-        filterChainDefinitionMap.put("/login", "anon");
+        
+        // 业务
         filterChainDefinitionMap.put("/relic/select/**", "anon");
         filterChainDefinitionMap.put("/friendShipLink/select/**", "anon");
         filterChainDefinitionMap.put("/relicType/select/**", "anon");
-        filterChainDefinitionMap.put("/**", "custom");          // r_ 使用自己写的过滤器过滤所有请求
+        
+        
+        filterChainDefinitionMap.put("/**", "authc");          // r_ 使用自己写的过滤器过滤所有请求
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        
+//        shiroFilterFactoryBean.setLoginUrl("login");
+        shiroFilterFactoryBean.setUnauthorizedUrl("404");
 
         return shiroFilterFactoryBean;
     }
 
-    @Bean(name = "getSecurityManager")
-    public DefaultWebSecurityManager getSecurityManager() {
+    @Bean
+    public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm());
         return securityManager;
-    }
+    } 
 
     @Bean
     public UserRealm userRealm() {
@@ -67,12 +78,12 @@ public class ShiroConfig {
     } 
 
     /**
-     * 注解访问授权动态拦截，不然不会执行doGetAuthenticationInfo
+     * 注解访问授权动态拦截，不然不会执行 doGetAuthenticationInfo
      */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(getSecurityManager());
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
         return authorizationAttributeSourceAdvisor;
     }
     
