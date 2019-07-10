@@ -77,7 +77,7 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into relic (name, pic_url, code,
+    insert into relic (id,name, pic_url, code,
     relic_type, amount, level,
     size, weight, attrition_rate,
     application, craft, material,
@@ -88,7 +88,7 @@
     culture_value, dynasty, transformed_urn,
     bucket_key, model_name, urn
     )
-    values (#{name,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
     #{relicType,jdbcType=INTEGER}, #{amount,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR},
     #{size,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, #{attritionRate,jdbcType=VARCHAR},
     #{application,jdbcType=VARCHAR}, #{craft,jdbcType=VARCHAR}, #{material,jdbcType=VARCHAR},

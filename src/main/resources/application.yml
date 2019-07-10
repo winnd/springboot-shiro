@@ -30,10 +30,18 @@ mybatis:
 #  config-location: classpath:mybatis-config.xml
 
 
-
 logging:
   level:
     com:
       bishe:
         demo:
           dao: debug
+
+#分页          
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: countSql
+  page-size-zero: true
+

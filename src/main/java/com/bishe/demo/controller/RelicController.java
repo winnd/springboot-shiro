@@ -17,8 +17,9 @@ public class RelicController {
     @Autowired IRelicService iRelicService;
 
     @GetMapping(value = "select/allRelic")
-    public ResponseServer selectAll() {
-        return iRelicService.selectAllRelic();
+    public ResponseServer selectAll(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                    @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+        return iRelicService.selectAllRelic(pageNum, pageSize);
     }
 
     @GetMapping(value = "select/relicType")
@@ -34,7 +35,7 @@ public class RelicController {
 
     @PostMapping(value = "/addNew")
     public ResponseServer insertRelic2(
-            @RequestPart(name = "formData") Relic relic, 
+            @RequestPart(name = "formData") Relic relic,
             @RequestParam(name = "coverImg", required = false) MultipartFile coverImg,
             @RequestParam(name = "imgList", required = false) MultipartFile[] imgList) {
         return iRelicService.insert(relic, coverImg, imgList);

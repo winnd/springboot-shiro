@@ -25,23 +25,32 @@
     </dependency>
 
     <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>2.0.1</version>
-    </dependency>
-
-    <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <scope>runtime</scope>
     </dependency>
 
+    <!--mybatis-->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+
+    <!--mybatis generator-->
     <dependency>
       <groupId>org.mybatis.generator</groupId>
       <artifactId>mybatis-generator-core</artifactId>
       <version>1.3.7</version>
       <scope>compile</scope>
       <optional>true</optional>
+    </dependency>
+    
+    <!--分页-->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper-spring-boot-starter</artifactId>
+      <version>1.2.12</version>
     </dependency>
     
     <dependency>
@@ -54,11 +63,17 @@
       <artifactId>pagehelper</artifactId>
       <version>RELEASE</version>
     </dependency>
-
+    
     <dependency>
       <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-spring-boot-starter</artifactId>
+      <artifactId>shiro-spring</artifactId>
       <version>1.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.8</version>
     </dependency>
 
   <!--springboot 热部署-->
@@ -80,6 +95,20 @@
       <artifactId>springfox-swagger-ui</artifactId>
       <version>2.7.0</version>
     </dependency>
+
+    <!--文件上传-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>3.6</version>
+    </dependency>
+
   </dependencies>
 
   <build>
